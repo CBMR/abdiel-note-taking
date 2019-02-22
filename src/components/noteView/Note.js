@@ -16,7 +16,7 @@ export default class Note extends Component {
 
   fetchNote = id => {
     axios
-      .get(`https://alf-lambda-notes.herokuapp.com/note/${id}`)
+      .get(`https://alf-lambda-notes.herokuapp.com/notes/note/${id}`)
       .then( response => {
         this.setState({...response.data})
       })
@@ -25,7 +25,7 @@ export default class Note extends Component {
 
   deleteNote = () => {
     axios
-      .delete(`https://alf-lambda-notes.herokuapp.com/note/${this.state.id}/delete`)
+      .delete(`https://alf-lambda-notes.herokuapp.com/notes/note/${this.state.id}/delete`)
       .then( () => {
         this.props.getNotes()
       })
@@ -36,7 +36,7 @@ export default class Note extends Component {
     const status = this.state
     const id = this.props.match.params.id
     axios
-    .put(`https://alf-lambda-notes.herokuapp.com/note/${id}/edit`, {...status, completed: true})
+    .put(`https://alf-lambda-notes.herokuapp.com/notes/note/${id}/edit`, {...status, completed: true})
     .then( () => {
       this.fetchNote(id)
     }).catch( err => console.log('failed'))

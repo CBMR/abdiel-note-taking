@@ -52,7 +52,7 @@ class App extends Component {
 
   createNote = note => {
     axios
-      .post('https://alf-lambda-notes.herokuapp.com/note/create', note)
+      .post('https://alf-lambda-notes.herokuapp.com/notes/note/create', note)
       .then( response => {
         this.getNotes()
       })
