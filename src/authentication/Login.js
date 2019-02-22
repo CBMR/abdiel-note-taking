@@ -22,7 +22,7 @@ export default class Login extends Component {
     const {username, password} = this.state
     axios.post('https://alf-lambda-notes.herokuapp.com/users/login', {username, password})
       .then( token => {
-        console.log(token)
+        console.log({username, password})
         localStorage.setItem('jwt', token.data)
         localStorage.setItem('username', username)
         window.location.reload()
