@@ -26,7 +26,7 @@ export default class Login extends Component {
         localStorage.setItem('jwt', token.data)
         localStorage.setItem('username', username)
         window.location.reload()
-        this.props.history.push('/notes')
+        this.props.history.push('/notes/4')
       }).catch( err => {
         console.log(err.body)
       })

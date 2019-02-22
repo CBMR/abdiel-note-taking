@@ -21,7 +21,7 @@ export default class SignUp extends Component {
       .then( token => {
         localStorage.setItem('jwt', token.data)
         localStorage.setItem('username', this.state.username)
-        this.props.history.push('/notes')
+        this.props.history.push('/notes/:id')
         window.location.reload()
       })
   }

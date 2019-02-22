@@ -26,15 +26,15 @@ class App extends Component {
 
   getNotes = () => {
     const token = localStorage.getItem('jwt')
+    console.log('token', token)
     const requestOptions = {
       headers: {
-        userID: this.state.userID,
         authorization: token
-      }
+      },
     }
     
     axios
-    .get('https://alf-lambda-notes.herokuapp.com/notes', requestOptions)
+    .get(`https://alf-lambda-notes.herokuapp.com/notes/${this.state.userID}`, requestOptions)
     .then( response => {
       console.log(response)
       this.setState({notes: response.data})
@@ -64,10 +64,10 @@ class App extends Component {
     return (
       <MainDiv className="App">
         <Side>
-          <SideBar />
+          <SideBar id={this.state.userID}/>
         </Side>
         <Content>
-          <Route exact path='/notes' render={ props => <ListNotes {...props} notes={this.state.notes}/>} />
+          <Route exact path='/notes/:id' render={ props => <ListNotes {...props} notes={this.state.notes}/>} />
           <Route path='/create-note' render={ props => <CreateNote {...props} createNote={this.createNote} id={this.state.userID} />} />
           <Route exact path='/note/:id' render={props => <Note {...props} getNotes={this.getNotes} />} />
           <Route path='/note/:id/edit' render={props => <Edit {...props} getNotes={this.getNotes} />} />
