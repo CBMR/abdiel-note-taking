@@ -9,12 +9,14 @@ import ListNotes from './components/listView/ListNotes';
 import CreateNote from './components/newView/CreateNote';
 import Note from './components/noteView/Note'
 import Edit from './components/editView/Edit';
+import Authentication from './authentication/Authentication'
 
 
 class App extends Component {
 
   state = {
-    notes: []
+    notes: [],
+    userID: ''
   }
 
   componentDidMount() {
@@ -22,8 +24,15 @@ class App extends Component {
   }
 
   getNotes = () => {
+    const token = localStorage.getItem('jwt')
+    const requestOptions = {
+      headers: {
+        authorization: token
+      }
+    }
+    
     axios
-    .get('https://alf-lambda-notes.herokuapp.com/notes')
+    .get('https://alf-lambda-notes.herokuapp.com/notes', requestOptions)
     .then( response => {
       console.log(response)
       this.setState({notes: response.data})
@@ -31,11 +40,17 @@ class App extends Component {
     .catch(err => console.log(err))
   }
 
+  getUser = () => {
+    axios.get('https://alf-lambda-notes.herokuapp.com/users/user')
+      .then( response => {
+        this.setState({user: response.data})
+      })
+  }
+
   createNote = note => {
     axios
       .post('https://alf-lambda-notes.herokuapp.com/note/create', note)
       .then( response => {
-        console.log(response)
         this.getNotes()
       })
       .catch(err => console.log(err))
@@ -49,7 +64,7 @@ class App extends Component {
         </Side>
         <Content>
           <Route exact path='/' render={ props => <ListNotes {...props} notes={this.state.notes}/>} />
-          <Route path='/create-note' render={ props => <CreateNote {...props} createNote={this.createNote} />} />
+          <Route path='/create-note' render={ props => <CreateNote {...props} createNote={this.createNote} id={this.state.userID} />} />
           <Route exact path='/note/:id' render={props => <Note {...props} getNotes={this.getNotes} />} />
           <Route path='/note/:id/edit' render={props => <Edit {...props} getNotes={this.getNotes} />} />
         </Content>
@@ -58,4 +73,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Authentication(App);

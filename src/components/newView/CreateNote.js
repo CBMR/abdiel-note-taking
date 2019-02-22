@@ -8,6 +8,7 @@ export default class CreateNote extends Component {
     title: '',
     content: '',
     completed: false,
+    user_id: this.props.id,
     time_posted: moment().format('YYYY-MM-DD hh:mm:ss a'),
   }
 
