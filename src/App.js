@@ -20,14 +20,14 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.getUser()
     this.getNotes()
   }
 
   getNotes = () => {
-    const token = localStorage.getItem('jwt')
     const requestOptions = {
       headers: {
-        authorization: token
+        userID: this.state.userID
       }
     }
     
@@ -41,9 +41,10 @@ class App extends Component {
   }
 
   getUser = () => {
-    axios.get('https://alf-lambda-notes.herokuapp.com/users/user')
+    const username = localStorage.getItem('username')
+    axios.get('https://alf-lambda-notes.herokuapp.com/users/user', username)
       .then( response => {
-        this.setState({user: response.data})
+        this.setState({userID: response.data.id})
       })
   }
 
