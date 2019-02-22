@@ -6,7 +6,7 @@ export default function () {
     <MainDiv>
       <Title>Lambda <br /> Notes</Title>
       <Button>
-        <StyledLink to={'/'}>View your Notes</StyledLink>
+        <StyledLink to={'/notes'}>View your Notes</StyledLink>
       </Button>
       <Button>
         <StyledLink to={'/create-note'}>+ Create New Note</StyledLink>

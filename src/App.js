@@ -66,7 +66,7 @@ class App extends Component {
           <SideBar />
         </Side>
         <Content>
-          <Route exact path='/' render={ props => <ListNotes {...props} notes={this.state.notes}/>} />
+          <Route exact path='/notes' render={ props => <ListNotes {...props} notes={this.state.notes}/>} />
           <Route path='/create-note' render={ props => <CreateNote {...props} createNote={this.createNote} id={this.state.userID} />} />
           <Route exact path='/note/:id' render={props => <Note {...props} getNotes={this.getNotes} />} />
           <Route path='/note/:id/edit' render={props => <Edit {...props} getNotes={this.getNotes} />} />
