@@ -44,8 +44,9 @@ class App extends Component {
 
   getUser = () => {
     const username = localStorage.getItem('username')
-    axios.get('https://alf-lambda-notes.herokuapp.com/users/user', username)
+    axios.get('https://alf-lambda-notes.herokuapp.com/users/user', {username})
       .then( response => {
+        console.log(response)
         this.setState({userID: response.data.id})
       })
   }
