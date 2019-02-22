@@ -25,9 +25,11 @@ class App extends Component {
   }
 
   getNotes = () => {
+    const token = localStorage.getItem('jwt')
     const requestOptions = {
       headers: {
-        userID: this.state.userID
+        userID: this.state.userID,
+        authorization: token
       }
     }
     
